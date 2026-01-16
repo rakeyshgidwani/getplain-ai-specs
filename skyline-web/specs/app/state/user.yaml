@@ -1,0 +1,19 @@
+# User state - cached user information from auth/API
+# These values are populated after login and used throughout the app
+
+state:
+  - name: userId
+    type: string | null
+    default: null
+
+  - name: userEmail
+    type: string | null
+    default: null
+
+  - name: userFullName
+    type: string | null
+    default: null
+
+  - name: userAvatarUrl
+    type: string | null
+    default: null

@@ -1,0 +1,10 @@
+{
+    "infraRepos": {
+        "repoDefaults": {
+            "manifestPattern": "**/deploy.hudson.yaml"
+        },
+        "repos": [
+            "../../grand-central/getplain"
+        ]
+    }
+}

@@ -1,0 +1,58 @@
+# User Profile Navigation Configuration
+# Sections appear in the user profile dropdown menu
+# Icons are from lucide-react: https://lucide.dev/icons
+
+sections:
+  - title: Account
+    items:
+      - name: Profile
+        href: /settings/profile
+        icon: User
+        description: Your profile settings
+        requiresAuth: true
+
+      - name: Security
+        href: /settings/security
+        icon: Shield
+        description: Password and security settings
+        requiresAuth: true
+
+      - name: API Keys
+        href: /settings/api-keys
+        icon: Key
+        description: Manage your API keys
+        requiresAuth: true
+
+      - name: Notifications
+        href: /settings/notifications
+        icon: Bell
+        description: Notification preferences
+        requiresAuth: true
+
+  - title: Organizations
+    items:
+      - name: My Organizations
+        href: /orgs
+        icon: Building2
+        description: View and manage organizations
+        requiresAuth: true
+
+  - title: Support
+    items:
+      - name: Help
+        href: /help
+        icon: HelpCircle
+        description: Help center and documentation
+        requiresAuth: true
+
+      - name: Contact
+        href: /contact
+        icon: Mail
+        description: Contact our support team
+        requiresAuth: true
+
+      - name: About
+        href: /about
+        icon: Info
+        description: Learn about us
+        requiresAuth: true

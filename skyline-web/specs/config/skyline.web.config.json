@@ -1,0 +1,60 @@
+{
+  "$schema": "https://skyline.dev/schemas/config.json",
+  "theme": {
+    "name": "Jeremy",
+    "mode": "light"
+  },
+  "branding": {
+    "logo": {
+      "showText": false
+    }
+  },
+  "env": {
+    "apiBase": "https://api.getplain.ai",
+    "twitterUrl": "https://twitter.com/plain",
+    "linkedinUrl": "https://linkedin.com/plain"
+  },
+  "site": {
+    "shortName": "plain",
+    "longName": "plain",
+    "description": "plain helps teams build scalable, production-deployable AI components that can be composed into reliable, real-world systems. It focuses on durability, clarity, and operational readiness rather than demos, hype, or one-off experiments."
+  },
+  "apiIntegrations": {
+    "enabled": true,
+    "defaultEnableAuth": true,
+    "openapi": [
+      {
+        "source": "specs/app/openapi/ArtifactDB/openapi.json",
+        "envVar": "NEXT_PUBLIC_ARTIFACT_DB_API_BASE"
+      },
+      {
+        "source": "specs/app/openapi/DeploymentDB/openapi.json",
+        "envVar": "NEXT_PUBLIC_DEPLOYMENT_DB_API_BASE"
+      },
+      {
+        "source": "specs/app/openapi/IntegrationDB/openapi.json",
+        "envVar": "NEXT_PUBLIC_INTEGRATION_DB_API_BASE"
+      },
+      {
+        "source": "specs/app/openapi/OrgDB/openapi.json",
+        "envVar": "NEXT_PUBLIC_ORG_DB_API_BASE"
+      },
+      {
+        "source": "specs/app/openapi/ProductDB/openapi.json",
+        "envVar": "NEXT_PUBLIC_PRODUCT_DB_API_BASE"
+      },
+      {
+        "source": "specs/app/openapi/ProjectDB/openapi.json",
+        "envVar": "NEXT_PUBLIC_PROJECT_DB_API_BASE"
+      },
+      {
+        "source": "specs/app/openapi/ SecretsDB/openapi.json",
+        "envVar": "NEXT_PUBLIC_SECRETS_DB_API_BASE"
+      },
+      {
+        "source": "specs/app/openapi/UserDB/openapi.json",
+        "envVar": "NEXT_PUBLIC_USER_DB_API_BASE"
+      }
+    ]
+  }
+}

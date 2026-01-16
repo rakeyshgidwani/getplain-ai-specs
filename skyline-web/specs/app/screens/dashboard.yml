@@ -1,0 +1,187 @@
+name: dashboard
+title: "Dashboard"
+
+# Data dependencies - fetch summary counts and recent activity
+data:
+  # Fetch all organizations for this user
+  - name: organizations
+    source: list_organizations_organizationses__get
+    params:
+      page: 1
+      size: 100
+
+  # Fetch all projects (across orgs)
+  - name: projects
+    source: list_projects_projectses__get
+    params:
+      page: 1
+      size: 100
+
+  # Fetch recent audit logs for transparency
+  - name: recentActivity
+    source: list_org_audit_logs_org_audit_logses__get
+    params:
+      page: 1
+      size: 10
+
+  # Fetch active deployments
+  - name: activeDeployments
+    source: list_active_deployments_active_deploymentses__get
+    params:
+      page: 1
+      size: 10
+
+content:
+  # Page Header with action buttons
+  - type: PageHeader
+    props:
+      title: "Dashboard"
+      subtitle: "Your transparency overview"
+    children:
+      - type: LinkButton
+        props:
+          href: "/products/plain-ai-agents"
+          variant: "default"
+          children: "Jump to plain AI agents"
+
+      - type: LinkButton
+        props:
+          href: "/products"
+          variant: "default"
+          children: "Explore Our Products"
+
+      # Only show "Create Your Organization" if user has no orgs
+      - type: LinkButton
+        showWhen: "${organizationsItems.length === 0}"
+        props:
+          href: "/orgs/create"
+          variant: "default"
+          children: "Create Your Organization"
+
+  # Stats Overview Row - 3 equal columns on desktop, 1 on mobile
+  - type: ComponentGrid
+    props:
+      columns:
+        xs: 1
+        sm: 2
+        md: 3
+        lg: 3
+        xl: 3
+    children:
+      - type: StatCard
+        props:
+          value: "${organizationsTotal}"
+          label: "Organizations"
+          icon: "🏢"
+          description: "Total orgs"
+          href: "/orgs"
+
+      - type: StatCard
+        props:
+          value: "${projectsTotal}"
+          label: "Projects"
+          icon: "📁"
+          description: "Total projects"
+          href: "/orgs"
+
+      - type: StatCard
+        props:
+          value: "${activeDeploymentsTotal}"
+          label: "Active Deployments"
+          icon: "🚀"
+          description: "Currently deployed"
+
+  # Two Column Layout for Activity and Deployments
+  - type: ComponentGrid
+    props:
+      columns:
+        xs: 1
+        sm: 1
+        md: 2
+        lg: 2
+        xl: 2
+    children:
+      # Recent Activity Column
+      - type: BaseCard
+        props:
+          variant: "accent"
+          fullHeight: true
+        children:
+          - type: PageHeader
+            props:
+              title: "Recent Activity"
+              subtitle: "Latest actions across your organizations"
+
+          - type: ActivityTimeline
+            props:
+              items: "${recentActivityItems}"
+              fields:
+                id: id
+                title: action
+                timestamp: created_at
+                actor: actor_key
+                type: action
+                description: resource_type
+              limit: 8
+              emptyState:
+                title: "No activity yet"
+                description: "Actions will appear here as you use the platform"
+
+      # Active Deployments Column
+      - type: BaseCard
+        props:
+          variant: "accent"
+          fullHeight: true
+        children:
+          - type: PageHeader
+            props:
+              title: "Active Deployments"
+              subtitle: "Currently running deployments"
+
+          - type: DataTable
+            props:
+              data: "${activeDeploymentsItems}"
+              emptyState:
+                title: "No active deployments"
+                description: "Deployments will appear here once services are deployed"
+              columns:
+                - key: "service_name"
+                  label: "Service"
+                  sortable: true
+                - key: "environment"
+                  label: "Environment"
+                  type: "badge"
+                - key: "status"
+                  label: "Status"
+                  type: "badge"
+                - key: "deployed_at"
+                  label: "Deployed"
+                  type: "datetime"
+              pagination:
+                enabled: false
+
+  # Recent Projects Section
+  - type: PageHeader
+    props:
+      title: "Recent Projects"
+      subtitle: "Projects you've been working on"
+    children:
+      - type: LinkButton
+        props:
+          variant: "ghost"
+          href: "/orgs"
+          children: "View All"
+
+  - type: CardList
+    props:
+      items: "${projectsItems}"
+      itemLinkPattern: "/orgs/{org_id}/projects/{id}"
+      fields:
+        id: id
+        title: name
+        subtitle: description
+        avatar: avatar_url
+        badge: status
+      emptyState:
+        title: "No projects yet"
+        description: "Create your first project to get started"

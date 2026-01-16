@@ -1,0 +1,216 @@
+# ============================================================================
+# ROUTES CONFIGURATION
+# ============================================================================
+# Note: Default routes (/privacy, /terms, /cookies) are automatically included
+# from skyline-web defaults. Override them here if you need custom screens.
+# ============================================================================
+
+routes:
+
+  # **************************************************************************
+  # UNAUTHENTICATED (Public)
+  # **************************************************************************
+  # These pages are accessible without login
+
+  # --------------------------------------------------------------------------
+  # Marketing / Landing
+  # --------------------------------------------------------------------------
+
+  - path: /
+    screen: landing
+    layout: main
+
+  - path: /about
+    screen: about
+    layout: main
+
+  - path: /blog
+    screen: blog
+    layout: main
+
+  - path: /blog/vibe-coding-backend-blind-spot
+    screen: blog-vibe-coding-backend-blind-spot
+    layout: main
+
+  - path: /blog/prompts-to-specifications-ai-agents
+    screen: blog-prompts-to-specifications-ai-agents
+    layout: main
+
+  # --------------------------------------------------------------------------
+  # Support / Info
+  # --------------------------------------------------------------------------
+
+  - path: /contact
+    screen: contact
+    layout: main
+
+  - path: /help
+    screen: help
+    layout: main
+
+  # --------------------------------------------------------------------------
+  # Legal (Overriding defaults with custom screens)
+  # --------------------------------------------------------------------------
+
+  - path: /privacy
+    screen: privacy-policy
+    layout: main
+
+  - path: /terms
+    screen: terms-of-service
+    layout: main
+
+  - path: /cookies
+    screen: cookie-policy
+    layout: main
+
+  # **************************************************************************
+  # AUTHENTICATED (App)
+  # **************************************************************************
+  # These pages require user to be logged in
+
+  # --------------------------------------------------------------------------
+  # Dashboard
+  # --------------------------------------------------------------------------
+
+  - path: /home
+    screen: dashboard
+    layout: main
+
+  - path: /dashboard
+    screen: dashboard
+    layout: main
+
+  # --------------------------------------------------------------------------
+  # Onboarding (First-time User Flow)
+  # --------------------------------------------------------------------------
+
+  - path: /onboarding/welcome
+    screen: onboarding-welcome
+    layout: main
+
+  - path: /onboarding/org
+    screen: onboarding-org-choice
+    layout: main
+
+  - path: /onboarding/org/create
+    screen: onboarding-org-create
+    layout: main
+
+  - path: /onboarding/project/create
+    screen: onboarding-project-create
+    layout: main
+
+  # --------------------------------------------------------------------------
+  # Organizations
+  # --------------------------------------------------------------------------
+
+  # List all orgs
+  - path: /orgs
+    screen: orgs
+    layout: main
+
+  # Create new org
+  - path: /orgs/create
+    screen: org-create
+    layout: main
+
+  # Org dashboard
+  - path: /orgs/:orgId
+    screen: org-dashboard
+    layout: main
+
+  # Org member detail
+  - path: /orgs/:orgId/members/:memberId
+    screen: org-member-detail
+    layout: main
+
+  # Org Settings
+  - path: /orgs/:orgId/settings
+    screen: org-settings
+    layout: main
+
+  - path: /orgs/:orgId/settings/members
+    screen: org-settings-members
+    layout: main
+
+  - path: /orgs/:orgId/settings/audit-log
+    screen: org-settings-audit-log
+    layout: main
+
+  # --------------------------------------------------------------------------
+  # Projects (nested under Org)
+  # --------------------------------------------------------------------------
+
+  # List projects in org
+  - path: /orgs/:orgId/projects
+    screen: projects
+    layout: main
+
+  # Create new project
+  - path: /orgs/:orgId/projects/create
+    screen: project-create
+    layout: main
+
+  # Project overview
+  - path: /orgs/:orgId/projects/:projectId
+    screen: project-overview
+    layout: main
+
+  # Project activity
+  - path: /orgs/:orgId/projects/:projectId/activity
+    screen: project-activity
+    layout: main
+
+  # Project Settings
+  - path: /orgs/:orgId/projects/:projectId/settings
+    screen: project-settings
+    layout: main
+
+  - path: /orgs/:orgId/projects/:projectId/settings/environments
+    screen: project-settings-environments
+    layout: main
+
+  - path: /orgs/:orgId/projects/:projectId/settings/access
+    screen: project-settings-access
+    layout: main
+
+# --------------------------------------------------------------------------
+# Products
+# --------------------------------------------------------------------------
+
+  - path: /products
+    screen: products
+    layout: main
+
+  - path: /products/:productId
+    screen: product-detail
+    layout: main
+
+  # --------------------------------------------------------------------------
+  # User Settings (Personal Account)
+  # --------------------------------------------------------------------------
+
+  - path: /settings/profile
+    screen: settings-profile
+    layout: main
+
+  - path: /settings/security
+    screen: settings-security
+    layout: main
+
+  - path: /settings/api-keys
+    screen: settings-api-keys
+    layout: main
+
+  - path: /settings/notifications
+    screen: settings-notifications
+    layout: main
+
+  # --------------------------------------------------------------------------
+  # Products
+  # --------------------------------------------------------------------------
+
+  - path: /products/plain-ai-agents
+    screen: agents
+    layout: main

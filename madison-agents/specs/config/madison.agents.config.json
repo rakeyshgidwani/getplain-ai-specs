@@ -1,0 +1,24 @@
+{
+    "project_name": "getplain-ai",
+    "llm": {
+        "default": "anthropic/claude-sonnet-4.5",
+        "by_agent": {}
+    },
+    "tool_packages": {
+        "standard": [
+            "langchain-community",
+            "langchain-perplexity"
+        ],
+        "crud": [],
+        "integrations": []
+    },
+    "tool_domains": {
+        "crud": [],
+        "integrations": []
+    },
+    "service": {
+        "auth": {
+            "mode": "none"
+        }
+    }
+}

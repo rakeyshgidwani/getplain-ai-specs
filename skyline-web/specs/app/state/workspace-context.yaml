@@ -1,0 +1,14 @@
+# Workspace context - the user's current working scope
+# Persisted to localStorage so users return to their last-used context
+
+state:
+  - name: currentOrgId
+    type: string | null
+    persist: localStorage
+    default: null
+
+  - name: currentProjectId
+    type: string | null
+    persist: localStorage
+    default: null
+    dependsOn: currentOrgId  # Resets when org changes

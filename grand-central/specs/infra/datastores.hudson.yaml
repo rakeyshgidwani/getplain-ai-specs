@@ -1,0 +1,69 @@
+version: '1.0'
+generatedBy: grand-central-core
+sourceSpec: >-
+  /Users/rakeshgidwani/VibeProjects/getplain.ai/hudson-river/Core/UserDB/hudson-river/product-specs/grand.central.core.project.yaml
+app:
+  name: user-db
+  blueprint: full-stack-app
+  owner: getplain-platform-engineering
+  id: user-db
+environments:
+  - name: dev
+  - name: qa
+  - name: stg
+  - name: prd
+  - name: prv
+datastores:
+  - name: user-db-db
+    type: postgres
+    properties:
+      version: '14'
+      storage: 20Gi
+    traits:
+      - type: env-binding
+        properties:
+          environments:
+            stg:
+              storage: 50Gi
+              multiAZ: false
+              backupRetention: 3
+            prd:
+              storage: 100Gi
+              multiAZ: true
+              backupRetention: 7
+    env:
+      dev:
+        enabled: true
+      qa:
+        enabled: true
+      stg:
+        enabled: true
+      prd:
+        enabled: true
+      prv:
+        enabled: true
+  - name: user-db-cache
+    type: redis
+    properties:
+      version: '7.0'
+    traits:
+      - type: env-binding
+        properties:
+          environments:
+            stg:
+              clusterMode: false
+              replicas: 1
+            prd:
+              clusterMode: true
+              replicas: 2
+    env:
+      dev:
+        enabled: true
+      qa:
+        enabled: true
+      stg:
+        enabled: true
+      prd:
+        enabled: true
+      prv:
+        enabled: true

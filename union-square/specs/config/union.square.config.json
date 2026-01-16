@@ -1,0 +1,23 @@
+{
+    "output": {
+        "dir": "union-square",
+        "cliName": "hudson"
+    },
+    "tagging": {
+        "strategy": "git-sha"
+    },
+    "build": {
+        "parallel": true,
+        "cache": true
+    },
+    "deploy": {
+        "timeout": 300,
+        "healthCheck": {
+            "interval": 5,
+            "retries": 30
+        }
+    },
+    "workflows": {
+        "github": false
+    }
+}

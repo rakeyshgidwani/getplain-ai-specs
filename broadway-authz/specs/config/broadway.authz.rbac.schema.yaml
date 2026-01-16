@@ -1,0 +1,178 @@
+# Default RBAC Schema Definition
+# Translates to SpiceDB .zed schema
+
+version: "1.0"
+
+# Resource hierarchy (scopes)
+resources:
+  organization:
+    description: "Top-level tenant boundary"
+    relations:
+      - admin
+      - member
+
+  project:
+    description: "Project within an organization"
+    parent: organization
+    relations:
+      - owner
+      - editor
+      - viewer
+
+  document:
+    description: "Document within a project"
+    parent: project
+    relations:
+      - owner
+      - editor
+      - viewer
+      - commenter
+
+# Role definitions (each role explicitly maps to a relation on its scope resource)
+roles:
+  # Organization roles
+  org_admin:
+    description: "Organization administrator"
+    display_name: "Organization Admin"
+    scope: organization
+    relation: admin
+    inherits: []
+
+  org_member:
+    description: "Organization member"
+    display_name: "Organization Member"
+    scope: organization
+    relation: member
+    inherits: []
+
+  # Project roles
+  project_owner:
+    description: "Project owner with full access"
+    display_name: "Project Owner"
+    scope: project
+    relation: owner
+    inherits:
+      - project_editor
+
+  project_editor:
+    description: "Can edit project resources"
+    display_name: "Project Editor"
+    scope: project
+    relation: editor
+    inherits:
+      - project_viewer
+
+  project_viewer:
+    description: "Read-only access to project"
+    display_name: "Project Viewer"
+    scope: project
+    relation: viewer
+    inherits: []
+
+  # Document roles
+  document_owner:
+    description: "Document owner with full access"
+    display_name: "Document Owner"
+    scope: document
+    relation: owner
+    inherits:
+      - document_editor
+
+  document_editor:
+    description: "Can edit document"
+    display_name: "Document Editor"
+    scope: document
+    relation: editor
+    inherits:
+      - document_viewer
+
+  document_viewer:
+    description: "Read-only access to document"
+    display_name: "Document Viewer"
+    scope: document
+    relation: viewer
+    inherits: []
+
+  document_commenter:
+    description: "Can comment on document"
+    display_name: "Document Commenter"
+    scope: document
+    relation: commenter
+    inherits:
+      - document_viewer
+
+# Permissions (granted_to must only contain roles, never direct relations)
+permissions:
+  organization:read:
+    description: "View organization details"
+    granted_to:
+      - org_admin
+      - org_member
+
+  organization:manage:
+    description: "Manage organization settings"
+    granted_to:
+      - org_admin
+
+  project:create:
+    description: "Create new projects"
+    granted_to:
+      - org_admin
+
+  project:delete:
+    description: "Delete projects"
+    granted_to:
+      - project_owner
+
+  project:read:
+    description: "View project"
+    granted_to:
+      - project_viewer
+      - project_editor
+      - project_owner
+
+  project:write:
+    description: "Modify project"
+    granted_to:
+      - project_editor
+      - project_owner
+
+  document:read:
+    description: "Read document"
+    granted_to:
+      - document_viewer
+      - document_commenter
+      - document_editor
+      - document_owner
+
+  document:write:
+    description: "Write document"
+    granted_to:
+      - document_editor
+      - document_owner
+
+  document:delete:
+    description: "Delete document"
+    granted_to:
+      - document_owner
+
+  document:comment:
+    description: "Comment on document"
+    granted_to:
+      - document_commenter
+      - document_editor
+      - document_owner
+
+# Inheritance rules (permission flows down hierarchy)
+inheritance:
+  - from: organization/admin
+    grants: project/owner
+
+  - from: project/owner
+    grants: document/owner
+
+  - from: project/editor
+    grants: document/editor
+
+  - from: project/viewer
+    grants: document/viewer

@@ -1,0 +1,27 @@
+{
+    "$schema": "./schemas/holland.connector.product.config.schema.json",
+    "$comment": "Default values for product configuration. These are merged with user-provided config.",
+    "defaults": {
+        "layers": {
+            "layer0": {
+                "enabled": true,
+                "openapi": true
+            },
+            "layer1": {
+                "enabled": true,
+                "openapi": true,
+                "primitives": [
+                    "*"
+                ]
+            },
+            "layer2": {
+                "enabled": true,
+                "openapi": true
+            },
+            "layer3": {
+                "enabled": true
+            }
+        },
+        "verbs": []
+    }
+}

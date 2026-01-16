@@ -1,0 +1,58 @@
+{
+    "projectName": "get-plain-ai",
+    "repoDefaults": {
+        "infra": "hudson-river/infra",
+        "db": "hudson-river/db",
+        "apps": "hudson-river/apps"
+    },
+    "repos": [
+        "../../../getplain.ai/hudson-river/Core/UserDB",
+        "../../../getplain.ai/hudson-river/Core/OrgDB",
+        "../../../getplain.ai/hudson-river/Core/ProjectDB",
+        "../../../getplain.ai/hudson-river/Output/ArtifactDB",
+        "../../../getplain.ai/hudson-river/Output/DeploymentDB",
+        "../../../getplain.ai/hudson-river/ThirdParty/IntegrationDB",
+        "../../../getplain.ai/hudson-river/ThirdParty/SecretsDB",
+        "../../../getplain.ai/hudson-river/Products/ProductDB",
+        {
+            "path": "../../../getplain.ai/broadway-authz/getplain",
+            "infra": "broadway-authz/infra"
+        }
+    ],
+    "infraProfile": {
+        "dev": "budget",
+        "stg": "budget",
+        "qa": "budget",
+        "prv": "budget",
+        "prd": "strategic"
+    },
+    "network": {
+        "authorized": {
+            "dev": [
+                {
+                    "name": "rakesh-home",
+                    "cidr": "173.63.118.2/32"
+                }
+            ],
+            "qa": [
+                {
+                    "name": "rakesh-home",
+                    "cidr": "173.63.118.2/32"
+                }
+            ],
+            "stg": [
+                {
+                    "name": "rakesh-home",
+                    "cidr": "173.63.118.2/32"
+                }
+            ],
+            "prv": [
+                {
+                    "name": "rakesh-home",
+                    "cidr": "173.63.118.2/32"
+                }
+            ],
+            "prd": []
+        }
+    }
+}

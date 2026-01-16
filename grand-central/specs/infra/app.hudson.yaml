@@ -1,0 +1,124 @@
+version: '1.0'
+generatedBy: grand-central-core
+sourceSpec: >-
+  /Users/rakeshgidwani/VibeProjects/getplain.ai/hudson-river/Core/UserDB/hudson-river/product-specs/grand.central.core.project.yaml
+app:
+  name: user-db
+  blueprint: full-stack-app
+  owner: getplain-platform-engineering
+  id: user-db
+environments:
+  - name: dev
+  - name: qa
+  - name: stg
+  - name: prd
+  - name: prv
+components:
+  - name: user-db-api
+    type: service
+    properties:
+      runtime: nodejs
+      port: 8000
+      healthCheck: /health
+      image: user-db-api:latest
+      ingress:
+        path: /user-db
+        internal: false
+    traits:
+      - type: lifecycle
+        properties:
+          enabled: true
+      - type: env-binding
+        properties:
+          environments:
+            dev:
+              replicas: 1
+              resources:
+                cpu: 250m
+                memory: 256Mi
+            qa:
+              replicas: 1
+              resources:
+                cpu: 250m
+                memory: 256Mi
+            prv:
+              replicas: 1
+              resources:
+                cpu: 250m
+                memory: 256Mi
+            stg:
+              replicas: 2
+              resources:
+                cpu: 500m
+                memory: 512Mi
+            prd:
+              replicas: 3
+              resources:
+                cpu: 500m
+                memory: 512Mi
+              ingress:
+                host: api.getplain.ai
+                tls: true
+    env:
+      dev:
+        enabled: true
+      qa:
+        enabled: true
+      stg:
+        enabled: true
+      prd:
+        enabled: true
+      prv:
+        enabled: true
+  - name: user-db-worker
+    type: service
+    properties:
+      runtime: nodejs
+      port: 8080
+      healthCheck: /health
+      image: user-db-worker:latest
+      command:
+        - python
+        - '-m'
+        - worker.main
+    traits:
+      - type: lifecycle
+        properties:
+          enabled: true
+      - type: env-binding
+        properties:
+          environments:
+            dev:
+              replicas: 1
+            qa:
+              replicas: 1
+            prv:
+              replicas: 1
+            stg:
+              replicas: 2
+            prd:
+              replicas: 2
+    env:
+      dev:
+        enabled: true
+      qa:
+        enabled: true
+      stg:
+        enabled: true
+      prd:
+        enabled: true
+      prv:
+        enabled: true
+relations:
+  - from: user-db-api
+    to: user-db-db
+    kind: connects
+  - from: user-db-api
+    to: user-db-cache
+    kind: connects
+  - from: user-db-worker
+    to: user-db-db
+    kind: connects
+  - from: user-db-worker
+    to: user-db-cache
+    kind: connects

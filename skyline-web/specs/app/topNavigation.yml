@@ -1,0 +1,63 @@
+# Top Navigation Configuration
+# Icons are from lucide-react: https://lucide.dev/icons
+
+public:
+  display:
+    - name: Home
+      href: /
+      icon: Home
+      description: Go to homepage
+
+    - name: Blog
+      href: /blog
+      icon: FileText
+      description: Latest news and article
+
+    - name: About
+      href: /about
+      icon: Info
+      description: Learn about us
+
+  hidden:
+    - name: Contact
+      href: /contact
+      icon: Mail
+      description: Get in touch
+
+    - name: Help
+      href: /help
+      icon: HelpCircle
+      description: Help center
+
+authenticated:
+  display:
+    - name: Dashboard
+      href: /dashboard
+      icon: LayoutDashboard
+      description: Your dashboard
+      requiresAuth: true
+
+    - name: Products
+      href: /products
+      icon: Package
+      description: Our products
+      requiresAuth: true
+
+    - name: plain AI agents
+      href: /products/plain-ai-agents
+      icon: Bot
+      description: AI agents
+      requiresAuth: true
+
+  hidden:
+    - name: Help
+      href: /help
+      icon: HelpCircle
+      description: Help center
+      requiresAuth: true
+
+    - name: Contact
+      href: /contact
+      icon: Mail
+      description: Get in touch
+      requiresAuth: true

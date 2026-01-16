@@ -1,0 +1,18 @@
+{
+  "outputDir": "broadway-authz",
+  "app": {
+    "name": "broadway-authz",
+    "owner": "platform"
+  },
+  "spicedb": {
+    "version": "v1.48.0",
+    "image": "authzed/spicedb",
+    "grpcPort": 50051,
+    "httpPort": 8443,
+    "metricsPort": 9090
+  },
+  "database": {
+    "name": "spicedb",
+    "schema": "public"
+  }
+}

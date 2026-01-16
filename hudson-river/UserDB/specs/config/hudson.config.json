@@ -1,0 +1,45 @@
+{
+  "$schema": "https://schemas.hudson-river.dev/config/v1.0.0",
+  "naming": {
+    "appName": "user-db",
+    "owner": "getplain-platform-engineering"
+  },
+  "ingress": {
+    "prd": {
+      "host": "api.getplain.ai"
+    }
+  },
+  "generators": {
+    "api": {
+      "outputDir": "hudson-river/apps/fastapi"
+    },
+    "worker": {
+      "outputDir": "hudson-river/apps/worker"
+    },
+    "infra": {
+      "outputDir": "hudson-river/infra",
+      "options": {
+        "gcp": {
+          "project": "hudson-river-get-plain-ai"
+        }
+      }
+    },
+    "docs": {
+      "outputDir": "hudson-river/docs"
+    },
+    "apiClient": {
+      "outputDir": "hudson-river/apps/fastapi-client"
+    },
+    "product-specs": {
+      "outputDir": "hudson-river/product-specs"
+    }
+  },
+  "database": {
+    "migrations": {
+      "directory": "hudson-river/db/migrations"
+    }
+  },
+  "output": {
+    "directory": "."
+  }
+}

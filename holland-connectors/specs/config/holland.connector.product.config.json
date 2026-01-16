@@ -1,0 +1,71 @@
+{
+    "products": [
+        {
+            "id": "openai",
+            "displayName": "OpenAI",
+            "defaultBaseUrl": "https://api.openai.com/v1",
+            "source": {
+                "registryId": "ai/openai",
+                "version": "v1"
+            },
+            "layers": {
+                "layer1": {
+                    "primitives": [
+                        "chat",
+                        "embeddings"
+                    ]
+                }
+            }
+        },
+        {
+            "id": "middesk",
+            "displayName": "Middesk",
+            "defaultBaseUrl": "https://api.middesk.com/v1",
+            "source": {
+                "registryId": "legal/lien/middesk",
+                "version": "v1"
+            },
+            "layers": {
+                "layer1": {
+                    "primitives": [
+                        "*"
+                    ]
+                }
+            }
+        },
+        {
+            "id": "dome",
+            "displayName": "Dome",
+            "defaultBaseUrl": "https://api.domeapi.io/v1",
+            "source": {
+                "registryId": "finance/prediction/dome",
+                "version": "v1"
+            },
+            "layers": {
+                "layer1": {
+                    "primitives": [
+                        "Default.getMarketPrice",
+                        "Default.getMatchingMarketsSports",
+                        "Default.getMatchingMarketsSportsBySport"
+                    ]
+                }
+            }
+        },
+        {
+            "id": "runpod",
+            "displayName": "RunPod",
+            "defaultBaseUrl": "https://rest.runpod.io/v1",
+            "source": {
+                "registryId": "infrastructure/gpucloud/runpod",
+                "version": "v1"
+            },
+            "layers": {
+                "layer1": {
+                    "primitives": [
+                        "*"
+                    ]
+                }
+            }
+        }
+    ]
+}
