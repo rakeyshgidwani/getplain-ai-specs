@@ -1,0 +1,8 @@
+your-project/
+specs/app/agents/
+├── customer-support/
+│   └── agents.yaml       # Agents for /customer-support endpoint
+├── sales/
+│   └── agents.yaml       # Agents for /sales endpoint
+└── internal-ops/
+    └── agents.yaml       # Agents for /internal-ops endpoint
